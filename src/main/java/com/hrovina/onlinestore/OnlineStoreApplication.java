@@ -1,9 +1,13 @@
 package com.hrovina.onlinestore;
 
 import com.hrovina.onlinestore.entities.Category;
+import com.hrovina.onlinestore.entities.City;
 import com.hrovina.onlinestore.entities.Product;
+import com.hrovina.onlinestore.entities.State;
 import com.hrovina.onlinestore.repositories.CategoryRepository;
+import com.hrovina.onlinestore.repositories.CityRepository;
 import com.hrovina.onlinestore.repositories.ProductRepository;
+import com.hrovina.onlinestore.repositories.StateRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,6 +24,12 @@ public class OnlineStoreApplication implements CommandLineRunner {
 
     @Autowired
     private ProductRepository productRepository;
+
+    @Autowired
+    private StateRepository stateRepository;
+
+    @Autowired
+    private CityRepository cityRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(OnlineStoreApplication.class, args);
@@ -44,6 +54,19 @@ public class OnlineStoreApplication implements CommandLineRunner {
 
         categoryRepository.saveAll(Arrays.asList(cat1, cat2));
         productRepository.saveAll(Arrays.asList(p1, p2, p3));
+
+        State est1 = new State(null, "SP");
+        State est2 = new State(null, "MG");
+
+        City c1  = new City(null, "Uberlandia", est1);
+        City c2  = new City(null, "Sao Paulo", est2);
+        City c3  = new City(null, "Campinas", est2);
+
+        est1.getCityList().addAll(Arrays.asList(c2,c3));
+        est2.getCityList().add(c1);
+
+        stateRepository.saveAll(Arrays.asList(est1, est2));
+        cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 
     }
 }
