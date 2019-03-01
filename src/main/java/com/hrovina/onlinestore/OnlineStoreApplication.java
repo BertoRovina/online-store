@@ -1,13 +1,8 @@
 package com.hrovina.onlinestore;
 
-import com.hrovina.onlinestore.entities.Category;
-import com.hrovina.onlinestore.entities.City;
-import com.hrovina.onlinestore.entities.Product;
-import com.hrovina.onlinestore.entities.State;
-import com.hrovina.onlinestore.repositories.CategoryRepository;
-import com.hrovina.onlinestore.repositories.CityRepository;
-import com.hrovina.onlinestore.repositories.ProductRepository;
-import com.hrovina.onlinestore.repositories.StateRepository;
+import com.hrovina.onlinestore.entities.*;
+import com.hrovina.onlinestore.repositories.*;
+import enums.ClientType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -30,6 +25,12 @@ public class OnlineStoreApplication implements CommandLineRunner {
 
     @Autowired
     private CityRepository cityRepository;
+
+    @Autowired
+    private ClientRepository clientRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(OnlineStoreApplication.class, args);
@@ -67,6 +68,18 @@ public class OnlineStoreApplication implements CommandLineRunner {
 
         stateRepository.saveAll(Arrays.asList(est1, est2));
         cityRepository.saveAll(Arrays.asList(c1, c2, c3));
+
+        Client client1 = new Client(null, "Maria S", "maria@gmail.com", "3554634",
+                        ClientType.LEGAL_PERSON);
+        client1.getPhones().addAll(Arrays.asList("6479160000","6479161111"));
+
+        Address add1 = new Address(null, "Eglinton Ave", "200", "Apt. 109", "YE", "m9v9l9", client1, c1);
+        Address add2 = new Address(null, "Spadina Ave", "60", "Apt. 214", "Spadina", "m9v9l9", client1, c2);
+
+        client1.getAddressList().addAll(Arrays.asList(add1, add2));
+
+        clientRepository.save(client1);
+        addressRepository.saveAll(Arrays.asList(add1, add2));
 
     }
 }
