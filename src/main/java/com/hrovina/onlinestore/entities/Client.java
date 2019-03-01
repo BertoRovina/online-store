@@ -1,5 +1,6 @@
 package com.hrovina.onlinestore.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import enums.ClientType;
 
 import javax.persistence.*;
@@ -18,6 +19,7 @@ public class Client implements Serializable {
     private String doc;
     private Integer clientType;
 
+    @JsonManagedReference
     @OneToMany(mappedBy = "client")
     private List<Address> addressList = new ArrayList<>();
 
