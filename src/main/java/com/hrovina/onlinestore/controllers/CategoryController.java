@@ -1,5 +1,6 @@
 package com.hrovina.onlinestore.controllers;
 
+import com.hrovina.onlinestore.dto.CategoryDto;
 import com.hrovina.onlinestore.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -9,6 +10,8 @@ import com.hrovina.onlinestore.entities.Category;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 @RestController
@@ -45,6 +48,13 @@ public class CategoryController {
     public ResponseEntity<Void> update(@PathVariable Integer id){
         categoryService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<CategoryDto>> findAll(){
+        List<Category> list = categoryService.findAll();
+        List<CategoryDto> listDto = list.stream().map(obj -> new CategoryDto(obj)).collect(Collectors.toList());
+        return ResponseEntity.ok().body(listDto);
     }
 }
 
