@@ -3,6 +3,7 @@ package com.hrovina.onlinestore.controllers;
 import com.hrovina.onlinestore.dto.CategoryDto;
 import com.hrovina.onlinestore.services.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -55,6 +56,19 @@ public class CategoryController {
         List<Category> list = categoryService.findAll();
         List<CategoryDto> listDto = list.stream().map(obj -> new CategoryDto(obj)).collect(Collectors.toList());
         return ResponseEntity.ok().body(listDto);
+    }
+
+    @GetMapping(value = "/page")
+    public ResponseEntity<Page<CategoryDto>> findPage(
+            @RequestParam(value = "page", defaultValue = "0") Integer page,
+            @RequestParam(value = "linesPerPage", defaultValue = "24") Integer linesPerPage,
+            @RequestParam(value = "oderBy", defaultValue = "name")String orderBy,
+            @RequestParam(value = "direction", defaultValue = "ASC")String direction){
+
+        Page<Category> list = categoryService.findPage(page, linesPerPage, orderBy, direction);
+        Page<CategoryDto> listDto = list.map(obj -> new CategoryDto(obj));
+        return ResponseEntity.ok().body(listDto);
+
     }
 }
 
