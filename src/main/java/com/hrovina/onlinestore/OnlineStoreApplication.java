@@ -41,6 +41,9 @@ public class OnlineStoreApplication implements CommandLineRunner {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    OrderItemRepository orderItemRepository;
+
     public static void main(String[] args) {
         SpringApplication.run(OnlineStoreApplication.class, args);
     }
@@ -104,5 +107,18 @@ public class OnlineStoreApplication implements CommandLineRunner {
 
         orderRepository.saveAll(Arrays.asList(order1, order2));
         paymentRepository.saveAll(Arrays.asList(payment1, payment2));
+
+        OrderItem orderItem1 = new OrderItem(order1, p1, 0.0, 1, 2000.0);
+        OrderItem orderItem2 = new OrderItem(order1, p3, 0.0, 2, 80.0);
+        OrderItem orderItem3 = new OrderItem(order2, p2, 100.0, 1, 800.0);
+
+        order1.getItemSet().addAll(Arrays.asList(orderItem1, orderItem2));
+        order2.getItemSet().add(orderItem3);
+
+        p1.getItemSet().addAll(Arrays.asList(orderItem1));
+        p1.getItemSet().addAll(Arrays.asList(orderItem3));
+        p1.getItemSet().addAll(Arrays.asList(orderItem2));
+
+        orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3));
     }
 }

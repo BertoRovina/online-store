@@ -3,7 +3,9 @@ package com.hrovina.onlinestore.entities;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 @Entity
 public class PurchaseOrder implements Serializable {
@@ -27,6 +29,9 @@ public class PurchaseOrder implements Serializable {
     @JoinColumn(name = "address_id")
     private Address address;
 
+    @OneToMany(mappedBy = "id.purchaseOrder")
+    private Set<OrderItem> itemSet = new HashSet<>();
+
     public PurchaseOrder() {
     }
 
@@ -35,6 +40,14 @@ public class PurchaseOrder implements Serializable {
         this.instant = instant;
         this.client = client;
         this.address = address;
+    }
+
+    public Set<OrderItem> getItemSet() {
+        return itemSet;
+    }
+
+    public void setItemSet(Set<OrderItem> itemSet) {
+        this.itemSet = itemSet;
     }
 
     public Integer getId() {
