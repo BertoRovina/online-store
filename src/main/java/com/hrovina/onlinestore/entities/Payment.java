@@ -1,6 +1,7 @@
 package com.hrovina.onlinestore.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import enums.PaymentState;
 
 import javax.persistence.*;
@@ -16,7 +17,7 @@ public abstract class Payment implements Serializable {
     private Integer id;
     private Integer state;
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToOne
     @JoinColumn(name="order_id")
     @MapsId

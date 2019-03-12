@@ -21,11 +21,9 @@ public class PurchaseOrder implements Serializable {
     @JsonFormat(pattern = "MM/dd/yyyy hh:mm")
     private Date instant;
 
-    @JsonManagedReference
     @OneToOne(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
     private Payment payment;
 
-    @JsonManagedReference
     @ManyToOne
     @JoinColumn(name = "client_id")
     private Client client;

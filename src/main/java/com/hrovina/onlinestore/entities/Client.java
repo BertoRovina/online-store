@@ -1,6 +1,7 @@
 package com.hrovina.onlinestore.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import enums.ClientType;
 
@@ -20,7 +21,6 @@ public class Client implements Serializable {
     private String doc;
     private Integer clientType;
 
-    @JsonManagedReference
     @OneToMany(mappedBy = "client")
     private List<Address> addressList = new ArrayList<>();
 
@@ -28,7 +28,7 @@ public class Client implements Serializable {
     @CollectionTable(name = "phone")
     private Set<String> phones = new HashSet<>();
 
-    @JsonBackReference
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<PurchaseOrder> purchaseOrderList = new ArrayList<>();
 
