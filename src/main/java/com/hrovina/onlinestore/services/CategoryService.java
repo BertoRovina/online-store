@@ -2,8 +2,10 @@ package com.hrovina.onlinestore.services;
 
 import com.hrovina.onlinestore.entities.Category;
 import com.hrovina.onlinestore.repositories.CategoryRepository;
+import com.hrovina.onlinestore.services.exceptions.DataIntegrityException;
 import com.hrovina.onlinestore.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -29,5 +31,14 @@ public class CategoryService {
     public Category update(Category category){
         search(category.getId());
         return repo.save(category);
+    }
+
+    public void delete(Integer id){
+        search(id);
+        try{
+            repo.deleteById(id);
+        }catch (DataIntegrityViolationException e){
+            throw new DataIntegrityException("Cannot delete object because it's associated with other objects.");
+        }
     }
 }
