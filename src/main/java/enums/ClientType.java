@@ -5,7 +5,7 @@ public enum ClientType {
     NATURAL_PERSON(1, "Natural Person"),
     LEGAL_PERSON(2, "Legal Person");
 
-    private int cod;
+      private int cod;
     private String description;
 
     ClientType(int cod, String description) {
@@ -30,7 +30,7 @@ public enum ClientType {
             }
         }
 
-        throw new IllegalArgumentException("Id invalid: " + cod);
+        throw new IllegalArgumentException("Invalid Id: " + cod);
     }
 
 }
