@@ -1,0 +1,92 @@
+package com.hrovina.onlinestore.entities;
+
+import javax.persistence.*;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.Objects;
+
+@Entity
+public class PurchaseOrder implements Serializable {
+    private static final long serialVersionUID = 1L;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
+
+
+    private Date instant;
+
+    @OneToOne(cascade = CascadeType.ALL, mappedBy = "purchaseOrder")
+    private Payment payment;
+
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    private Client client;
+
+    @ManyToOne
+    @JoinColumn(name = "address_id")
+    private Address address;
+
+    public PurchaseOrder() {
+    }
+
+    public PurchaseOrder(Integer id, Date instant, Client client, Address address) {
+        this.id = id;
+        this.instant = instant;
+        this.client = client;
+        this.address = address;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public Date getInstant() {
+        return instant;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public Client getClient() {
+        return client;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setInstant(Date instant) {
+        this.instant = instant;
+    }
+
+    public void setPayment(Payment payment) {
+        this.payment = payment;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PurchaseOrder purchaseOrder = (PurchaseOrder) o;
+        return id == purchaseOrder.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+}

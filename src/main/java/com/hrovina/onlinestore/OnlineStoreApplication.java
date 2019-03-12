@@ -3,11 +3,14 @@ package com.hrovina.onlinestore;
 import com.hrovina.onlinestore.entities.*;
 import com.hrovina.onlinestore.repositories.*;
 import enums.ClientType;
+import enums.PaymentState;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -31,6 +34,12 @@ public class OnlineStoreApplication implements CommandLineRunner {
 
     @Autowired
     private AddressRepository addressRepository;
+
+    @Autowired
+    private PaymentRepository paymentRepository;
+
+    @Autowired
+    private OrderRepository orderRepository;
 
     public static void main(String[] args) {
         SpringApplication.run(OnlineStoreApplication.class, args);
@@ -81,5 +90,19 @@ public class OnlineStoreApplication implements CommandLineRunner {
         clientRepository.save(client1);
         addressRepository.saveAll(Arrays.asList(add1, add2));
 
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+        PurchaseOrder order1 = new PurchaseOrder(null, simpleDateFormat.parse("30/09/2017 10:32"), client1, add1);
+        PurchaseOrder order2 = new PurchaseOrder(null, simpleDateFormat.parse("30/09/2017 19:35"), client1, add2);
+
+        Payment payment1 = new CardPayment(null, PaymentState.PAID, order1, 6);
+        order1.setPayment(payment1);
+
+        Payment payment2 = new BankBilletPayment(null, PaymentState.PENDING, order2, simpleDateFormat.parse("20/10/2017 00:00"), null);
+        order2.setPayment(payment2);
+
+        client1.getPurchaseOrderList().addAll(Arrays.asList(order1, order2));
+
+        orderRepository.saveAll(Arrays.asList(order1, order2));
+        paymentRepository.saveAll(Arrays.asList(payment1, payment2));
     }
 }
