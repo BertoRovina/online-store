@@ -53,6 +53,11 @@ public class OnlineStoreApplication implements CommandLineRunner {
 
         Category cat1 = new Category(null, "Electronics");
         Category cat2 = new Category(null, "Office");
+        Category cat3 = new Category(null, "Home");
+        Category cat4 = new Category(null, "Enterprise");
+        Category cat5 = new Category(null, "Cars");
+        Category cat6 = new Category(null, "Utilities");
+        Category cat7 = new Category(null, "Christmas");
 
         Product p1 = new Product(null, "Mouse", 80);
         Product p2 = new Product(null, "Printer", 800);
@@ -65,7 +70,7 @@ public class OnlineStoreApplication implements CommandLineRunner {
         p2.getCategoryList().addAll(Arrays.asList(cat1, cat2));
         p3.getCategoryList().add(cat1);
 
-        categoryRepository.saveAll(Arrays.asList(cat1, cat2));
+        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
         productRepository.saveAll(Arrays.asList(p1, p2, p3));
 
         State est1 = new State(null, "SP");
