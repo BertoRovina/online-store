@@ -1,6 +1,7 @@
 package com.hrovina.onlinestore.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -26,6 +27,7 @@ public class Product implements Serializable {
 
     private List<Category> categoryList = new ArrayList<>();
 
+    @JsonIgnore
     @OneToMany(mappedBy = "id.product")
     private Set<OrderItem> itemSet = new HashSet<>();
 
@@ -38,6 +40,7 @@ public class Product implements Serializable {
         this.price = price;
     }
 
+    @JsonIgnore
     public List<PurchaseOrder> getPurchaseOrders(){
         List<PurchaseOrder> purchaseOrders = new ArrayList<>();
         for (OrderItem item : itemSet){
