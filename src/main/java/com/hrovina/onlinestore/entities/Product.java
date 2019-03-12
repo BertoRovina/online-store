@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Entity
 public class Product implements Serializable {
@@ -25,7 +23,11 @@ public class Product implements Serializable {
             joinColumns = @JoinColumn(name = "product_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id")
     )
+
     private List<Category> categoryList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "id.product")
+    private Set<OrderItem> itemSet = new HashSet<>();
 
     public Product() {
     }
@@ -34,6 +36,38 @@ public class Product implements Serializable {
         this.id = id;
         this.name = name;
         this.price = price;
+    }
+
+    public List<PurchaseOrder> getPurchaseOrders(){
+        List<PurchaseOrder> purchaseOrders = new ArrayList<>();
+        for (OrderItem item : itemSet){
+            purchaseOrders.add(item.getPurchaseOrder());
+        }
+        return purchaseOrders;
+    }
+
+    public Set<OrderItem> getItemSet() {
+        return itemSet;
+    }
+
+    public void setItemSet(Set<OrderItem> itemSet) {
+        this.itemSet = itemSet;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public void setCategoryList(List<Category> categoryList) {
+        this.categoryList = categoryList;
     }
 
     public Integer getId() {
