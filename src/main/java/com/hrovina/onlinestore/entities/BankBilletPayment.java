@@ -1,5 +1,6 @@
 package com.hrovina.onlinestore.entities;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import enums.PaymentState;
 
 import javax.persistence.Entity;
@@ -20,10 +21,12 @@ public class BankBilletPayment extends Payment {
         this.paymentDate = paymentDate;
     }
 
+    @JsonFormat(pattern = "MM/dd/yyyy hh:mm")
     public Date getExpireDate() {
         return expireDate;
     }
 
+    @JsonFormat(pattern = "MM/dd/yyyy hh:mm")
     public Date getPaymentDate() {
         return paymentDate;
     }

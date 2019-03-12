@@ -93,14 +93,14 @@ public class OnlineStoreApplication implements CommandLineRunner {
         clientRepository.save(client1);
         addressRepository.saveAll(Arrays.asList(add1, add2));
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        PurchaseOrder order1 = new PurchaseOrder(null, simpleDateFormat.parse("30/09/2017 10:32"), client1, add1);
-        PurchaseOrder order2 = new PurchaseOrder(null, simpleDateFormat.parse("30/09/2017 19:35"), client1, add2);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/DD/yyyy HH:mm");
+        PurchaseOrder order1 = new PurchaseOrder(null, simpleDateFormat.parse("09/30/2017 10:32"), client1, add1);
+        PurchaseOrder order2 = new PurchaseOrder(null, simpleDateFormat.parse("09/30/2017 19:35"), client1, add2);
 
         Payment payment1 = new CardPayment(null, PaymentState.PAID, order1, 6);
         order1.setPayment(payment1);
 
-        Payment payment2 = new BankBilletPayment(null, PaymentState.PENDING, order2, simpleDateFormat.parse("20/10/2017 00:00"), null);
+        Payment payment2 = new BankBilletPayment(null, PaymentState.PENDING, order2, simpleDateFormat.parse("10/20/2017 00:00"), null);
         order2.setPayment(payment2);
 
         client1.getPurchaseOrderList().addAll(Arrays.asList(order1, order2));
