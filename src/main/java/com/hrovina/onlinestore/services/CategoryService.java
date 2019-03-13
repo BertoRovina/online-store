@@ -1,5 +1,6 @@
 package com.hrovina.onlinestore.services;
 
+import com.hrovina.onlinestore.dto.CategoryDto;
 import com.hrovina.onlinestore.entities.Category;
 import com.hrovina.onlinestore.repositories.CategoryRepository;
 import com.hrovina.onlinestore.services.exceptions.DataIntegrityException;
@@ -53,5 +54,9 @@ public class CategoryService {
     public Page<Category> findPage(Integer page, Integer linesPerPage, String orderBy, String direction){
         PageRequest pageRequest = PageRequest.of(page, linesPerPage, Sort.Direction.valueOf(direction), orderBy);
         return repo.findAll(pageRequest);
+    }
+
+    public Category fromDTO(CategoryDto categorydto){
+        return new Category(categorydto.getId(), categorydto.getName());
     }
 }

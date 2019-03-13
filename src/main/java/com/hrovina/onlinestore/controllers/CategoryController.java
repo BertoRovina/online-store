@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import com.hrovina.onlinestore.entities.Category;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -29,7 +30,8 @@ public class CategoryController {
     }
 
     @RequestMapping(method = RequestMethod.POST)
-    public ResponseEntity<Void> insert(@RequestBody Category category){
+    public ResponseEntity<Void> insert(@Valid @RequestBody CategoryDto categoryDto){
+        Category category = categoryService.fromDTO(categoryDto);
         category = categoryService.insert(category);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}").buildAndExpand(category.getId()).toUri();
@@ -39,7 +41,8 @@ public class CategoryController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public ResponseEntity<Void> update(@RequestBody Category category, @PathVariable Integer id){
+    public ResponseEntity<Void> update(@Valid @RequestBody CategoryDto categoryDto, @PathVariable Integer id){
+        Category category = categoryService.fromDTO(categoryDto);
         category.setId(id);
         category = categoryService.update(category);
         return ResponseEntity.noContent().build();
