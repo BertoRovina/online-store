@@ -1,10 +1,12 @@
 package com.hrovina.onlinestore.dto;
 
 import com.hrovina.onlinestore.entities.Category;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
 public class CategoryDto implements Serializable {
@@ -13,6 +15,9 @@ public class CategoryDto implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
+
+    @NotEmpty(message = "Category name is mandatory")
+    @Length(min = 5, max = 80, message = "Must be between 5 and 80 characters")
     private String name;
 
     public CategoryDto() {
