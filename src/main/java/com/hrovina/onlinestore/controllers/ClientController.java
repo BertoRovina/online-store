@@ -1,6 +1,9 @@
 package com.hrovina.onlinestore.controllers;
 
+import com.hrovina.onlinestore.dto.CategoryDto;
 import com.hrovina.onlinestore.dto.ClientDto;
+import com.hrovina.onlinestore.dto.RegisterClientDto;
+import com.hrovina.onlinestore.entities.Category;
 import com.hrovina.onlinestore.entities.Client;
 import com.hrovina.onlinestore.entities.Client;
 import com.hrovina.onlinestore.services.ClientService;
@@ -8,8 +11,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,6 +63,16 @@ public class ClientController {
         Page<Client> list = clientService.findPage(page, linesPerPage, orderBy, direction);
         Page<ClientDto> listDto = list.map(obj -> new ClientDto(obj));
         return ResponseEntity.ok().body(listDto);
+    }
+
+    @PostMapping
+    public ResponseEntity<Void> insert(@Valid @RequestBody RegisterClientDto registerClientDto){
+        Client client = clientService.fromDTO(registerClientDto);
+        client = clientService.insert(client);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+                .path("/{id}").buildAndExpand(client.getId()).toUri();
+
+        return ResponseEntity.created(uri).build();
 
     }
 }

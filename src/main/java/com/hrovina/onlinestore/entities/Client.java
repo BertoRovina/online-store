@@ -1,8 +1,6 @@
 package com.hrovina.onlinestore.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import enums.ClientType;
 
 import javax.persistence.*;
