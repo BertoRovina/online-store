@@ -2,6 +2,7 @@ package com.hrovina.onlinestore.services;
 
 import com.hrovina.onlinestore.dto.CategoryDto;
 import com.hrovina.onlinestore.entities.Category;
+import com.hrovina.onlinestore.entities.Client;
 import com.hrovina.onlinestore.repositories.CategoryRepository;
 import com.hrovina.onlinestore.services.exceptions.DataIntegrityException;
 import com.hrovina.onlinestore.services.exceptions.ObjectNotFoundException;
@@ -34,8 +35,9 @@ public class CategoryService {
     }
 
     public Category update(Category category){
-        search(category.getId());
-        return repo.save(category);
+        Category newCategory = search(category.getId());
+        updateData(newCategory, category);
+        return repo.save(newCategory);
     }
 
     public void delete(Integer id){
@@ -58,5 +60,9 @@ public class CategoryService {
 
     public Category fromDTO(CategoryDto categorydto){
         return new Category(categorydto.getId(), categorydto.getName());
+    }
+
+    private void updateData(Category newCategory, Category category){
+        newCategory.setName(category.getName());
     }
 }
