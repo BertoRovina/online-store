@@ -59,7 +59,7 @@ public class ClientService {
         try{
             repo.deleteById(id);
         }catch (DataIntegrityViolationException e){
-            throw new DataIntegrityException("Cannot delete object because it's associated with other objects.");
+            throw new DataIntegrityException("Cannot delete object because it's associated with orders.");
         }
     }
 
