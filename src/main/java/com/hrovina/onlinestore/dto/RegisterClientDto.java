@@ -1,21 +1,42 @@
 package com.hrovina.onlinestore.dto;
 
+import com.hrovina.onlinestore.services.exceptions.ClientInsert;
+import org.hibernate.validator.constraints.Length;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClientInsert
 public class RegisterClientDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
+    @NotEmpty(message = "Client name is mandatory")
+    @Length(min = 5, max = 120, message = "Must be between 5 and 120 characters")
     private String name;
+
+    @NotEmpty(message = "Client email is mandatory")
+    @Email(message = "Invalid Email")
     private String email;
+
+    @NotEmpty(message = "Client doc is mandatory")
+    @Length(min = 9, max = 9, message = "Invalid doc, should have 9 digits")
     private String doc;
+
     private Integer clientType;
 
+    @NotEmpty(message = "Client address is mandatory")
     private String address;
+
+    @NotEmpty(message = "Client address number is mandatory")
     private String number;
     private String additionalAddressInfo;
     private String area;
+
+    @NotEmpty(message = "Client zip code is mandatory")
     private String zipCode;
 
+    @NotEmpty(message = "At least one phone number must be given")
     private String phone1;
     private String phone2;
     private String phone3;
