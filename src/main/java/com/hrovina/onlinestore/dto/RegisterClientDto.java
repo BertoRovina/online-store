@@ -1,6 +1,6 @@
 package com.hrovina.onlinestore.dto;
 
-import com.hrovina.onlinestore.services.exceptions.ClientInsert;
+import com.hrovina.onlinestore.services.exceptions.validation.ClientInsert;
 import org.hibernate.validator.constraints.Length;
 
 import javax.validation.constraints.Email;
