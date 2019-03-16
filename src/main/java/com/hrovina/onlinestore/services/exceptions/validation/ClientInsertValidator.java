@@ -1,9 +1,10 @@
-package com.hrovina.onlinestore.services.exceptions;
+package com.hrovina.onlinestore.services.exceptions.validation;
 
 import com.hrovina.onlinestore.controllers.exceptions.FieldMessages;
 import com.hrovina.onlinestore.dto.RegisterClientDto;
 import com.hrovina.onlinestore.entities.Client;
 import com.hrovina.onlinestore.repositories.ClientRepository;
+import com.hrovina.onlinestore.services.exceptions.validation.ClientInsert;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.validation.ConstraintValidator;

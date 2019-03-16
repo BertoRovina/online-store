@@ -1,6 +1,7 @@
 package com.hrovina.onlinestore.dto;
 
 import com.hrovina.onlinestore.entities.Client;
+import com.hrovina.onlinestore.services.exceptions.validation.ClientUpdate;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.GeneratedValue;
@@ -10,6 +11,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 
+@ClientUpdate
 public class ClientDto implements Serializable {
     private static final long serialVersionUID = 1L;
 
