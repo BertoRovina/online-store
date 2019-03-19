@@ -45,6 +45,14 @@ public class PurchaseOrder implements Serializable {
         this.address = address;
     }
 
+    public double getTotalAmount(){
+        double total = 0;
+        for (OrderItem item : itemSet){
+            total += item.getSubTotal();
+        }
+        return total;
+    }
+
     public Set<OrderItem> getItemSet() {
         return itemSet;
     }
