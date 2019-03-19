@@ -106,7 +106,7 @@ public class PurchaseOrder implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PurchaseOrder purchaseOrder = (PurchaseOrder) o;
-        return id == purchaseOrder.id;
+        return id.equals(purchaseOrder.id);
     }
 
     @Override

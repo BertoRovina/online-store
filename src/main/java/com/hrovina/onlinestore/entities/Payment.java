@@ -2,6 +2,7 @@ package com.hrovina.onlinestore.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import enums.PaymentState;
 
 import javax.persistence.*;
@@ -10,6 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "@type")
 public abstract class Payment implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -37,7 +39,7 @@ public abstract class Payment implements Serializable {
     }
 
     public PaymentState getState() {
-        return PaymentState.toEnum(id);
+        return PaymentState.toEnum(state);
     }
 
     public PurchaseOrder getPurchaseOrder() {
