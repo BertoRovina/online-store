@@ -44,6 +44,10 @@ public class OrderItem implements Serializable {
         return id.getProduct();
     }
 
+    public void setProduct(Product product){
+        id.setProduct(product);
+    }
+
     public void setDiscount(Double discount) {
         this.discount = discount;
     }
@@ -54,6 +58,10 @@ public class OrderItem implements Serializable {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public void setOrderItem(PurchaseOrder purchaseOrder){
+        id.setPurchaseOrder(purchaseOrder);
     }
 
     public Double getDiscount() {
