@@ -4,14 +4,12 @@ import com.hrovina.onlinestore.entities.*;
 import com.hrovina.onlinestore.repositories.*;
 import enums.ClientType;
 import enums.PaymentState;
-import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 @SpringBootApplication
@@ -51,17 +49,25 @@ public class OnlineStoreApplication implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        Category cat1 = new Category(null, "Electronics");
+        Category cat1 = new Category(null, "IT");
         Category cat2 = new Category(null, "Office");
-        Category cat3 = new Category(null, "Home");
-        Category cat4 = new Category(null, "Enterprise");
-        Category cat5 = new Category(null, "Cars");
-        Category cat6 = new Category(null, "Utilities");
-        Category cat7 = new Category(null, "Christmas");
+        Category cat3 = new Category(null, "House utilities");
+        Category cat4 = new Category(null, "Electronics");
+        Category cat5 = new Category(null, "Garden");
+        Category cat6 = new Category(null, "Decoration");
+        Category cat7 = new Category(null, "Essence");
 
-        Product p1 = new Product(null, "Mouse", 80);
-        Product p2 = new Product(null, "Printer", 800);
-        Product p3 = new Product(null, "Computer", 2000);
+        Product p1 = new Product(null, "Computer", 2000.00);
+        Product p2 = new Product(null, "Printer", 800.00);
+        Product p3 = new Product(null, "Mouse", 80.00);
+        Product p4 = new Product(null, "Office Desk", 300.00);
+        Product p5 = new Product(null, "Towel", 50.00);
+        Product p6 = new Product(null, "Quilt", 200.00);
+        Product p7 = new Product(null, "TV true color", 1200.00);
+        Product p8 = new Product(null, "Trimmer", 800.00);
+        Product p9 = new Product(null, "Bedside lamp", 100.00);
+        Product p10 = new Product(null, "Pending", 180.00);
+        Product p11 = new Product(null, "Shampoo", 90.00);
 
         cat1.getProductList().addAll(Arrays.asList(p1, p2, p3));
         cat2.getProductList().add(p2);
@@ -69,9 +75,27 @@ public class OnlineStoreApplication implements CommandLineRunner {
         p1.getCategoryList().add(cat1);
         p2.getCategoryList().addAll(Arrays.asList(cat1, cat2));
         p3.getCategoryList().add(cat1);
+        cat2.getProductList().addAll(Arrays.asList(p2, p4));
+        cat3.getProductList().addAll(Arrays.asList(p5, p6));
+        cat4.getProductList().addAll(Arrays.asList(p1, p2, p3, p7));
+        cat5.getProductList().add(p8);
+        cat6.getProductList().addAll(Arrays.asList(p9, p10));
+        cat7.getProductList().add(p11);
+
+        p1.getCategoryList().addAll(Arrays.asList(cat1, cat4));
+        p2.getCategoryList().addAll(Arrays.asList(cat1, cat2, cat4));
+        p3.getCategoryList().addAll(Arrays.asList(cat1, cat4));
+        p4.getCategoryList().add(cat2);
+        p5.getCategoryList().add(cat3);
+        p6.getCategoryList().add(cat3);
+        p7.getCategoryList().add(cat4);
+        p8.getCategoryList().add(cat5);
+        p9.getCategoryList().add(cat6);
+        p10.getCategoryList().add(cat6);
+        p11.getCategoryList().add(cat7);
 
         categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
-        productRepository.saveAll(Arrays.asList(p1, p2, p3));
+        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
 
         State est1 = new State(null, "SP");
         State est2 = new State(null, "MG");
@@ -120,9 +144,9 @@ public class OnlineStoreApplication implements CommandLineRunner {
         order1.getItemSet().addAll(Arrays.asList(orderItem1, orderItem2));
         order2.getItemSet().add(orderItem3);
 
-        p1.getItemSet().addAll(Arrays.asList(orderItem1));
-        p1.getItemSet().addAll(Arrays.asList(orderItem3));
-        p1.getItemSet().addAll(Arrays.asList(orderItem2));
+        p1.getItemSet().add(orderItem1);
+        p1.getItemSet().add(orderItem3);
+        p1.getItemSet().add(orderItem2);
 
         orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3));
     }
