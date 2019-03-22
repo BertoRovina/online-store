@@ -1,14 +1,14 @@
 package com.hrovina.onlinestore.controllers;
 
-import com.hrovina.onlinestore.dto.CategoryDto;
-import com.hrovina.onlinestore.services.CategoryService;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.hrovina.onlinestore.entities.Category;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import com.hrovina.onlinestore.dto.CategoryDto;
+import com.hrovina.onlinestore.services.CategoryService;
 
 import javax.validation.Valid;
 import java.net.URI;
@@ -37,7 +37,6 @@ public class CategoryController {
                 .path("/{id}").buildAndExpand(category.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
-
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
