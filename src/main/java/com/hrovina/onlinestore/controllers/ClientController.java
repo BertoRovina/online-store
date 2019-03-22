@@ -1,10 +1,7 @@
 package com.hrovina.onlinestore.controllers;
 
-import com.hrovina.onlinestore.dto.CategoryDto;
 import com.hrovina.onlinestore.dto.ClientDto;
 import com.hrovina.onlinestore.dto.RegisterClientDto;
-import com.hrovina.onlinestore.entities.Category;
-import com.hrovina.onlinestore.entities.Client;
 import com.hrovina.onlinestore.entities.Client;
 import com.hrovina.onlinestore.services.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
