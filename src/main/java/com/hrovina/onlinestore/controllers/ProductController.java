@@ -25,7 +25,7 @@ public class ProductController {
         return ResponseEntity.ok().body(obj);
     }
 
-    @GetMapping()
+    @GetMapping(value = "/page")
     public ResponseEntity<Page<ProductDto>> findPage(
             @RequestParam(value = "name", defaultValue = "") String name,
             @RequestParam(value = "categories", defaultValue = "") String categories,
