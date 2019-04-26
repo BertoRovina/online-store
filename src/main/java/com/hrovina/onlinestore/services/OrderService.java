@@ -3,6 +3,7 @@ package com.hrovina.onlinestore.services;
 import com.hrovina.onlinestore.entities.BankBilletPayment;
 import com.hrovina.onlinestore.entities.OrderItem;
 import com.hrovina.onlinestore.entities.PurchaseOrder;
+import com.hrovina.onlinestore.repositories.ClientRepository;
 import com.hrovina.onlinestore.repositories.OrderItemRepository;
 import com.hrovina.onlinestore.repositories.OrderRepository;
 import com.hrovina.onlinestore.repositories.PaymentRepository;
@@ -33,6 +34,9 @@ public class OrderService {
     @Autowired
     private ProductService productService;
 
+    @Autowired
+    private ClientService clientService;
+
     public PurchaseOrder search(Integer id) {
         Optional<PurchaseOrder> obj = repo.findById(id);
 
@@ -44,6 +48,7 @@ public class OrderService {
     public PurchaseOrder insert(PurchaseOrder obj){
         obj.setId(null);
         obj.setInstant(new Date());
+        obj.setClient(clientService.search(obj.getClient().getId()));
         obj.getPayment().setState(PaymentState.PENDING);
         obj.getPayment().setPurchaseOrder(obj);
 
@@ -56,10 +61,12 @@ public class OrderService {
         paymentRepository.save(obj.getPayment());
         for (OrderItem item : obj.getItemSet()){
             item.setDiscount(0.0);
-            item.setPrice(productService.search(item.getProduct().getId()).getPrice());
+            item.setProduct(productService.search(item.getProduct().getId()));
+            item.setPrice(item.getProduct().getPrice());
             item.setOrderItem(obj);
         }
         orderItemRepository.saveAll(obj.getItemSet());
+        System.out.println(obj);
         return obj;
     }
 }
