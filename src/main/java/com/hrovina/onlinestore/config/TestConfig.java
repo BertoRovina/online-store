@@ -1,6 +1,8 @@
 package com.hrovina.onlinestore.config;
 
 import com.hrovina.onlinestore.services.DBService;
+import com.hrovina.onlinestore.services.EmailService;
+import com.hrovina.onlinestore.services.MockEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,5 +22,10 @@ public class TestConfig {
         dbService.instantiateTestDatabase();
 
         return true;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new MockEmailService();
     }
 }
