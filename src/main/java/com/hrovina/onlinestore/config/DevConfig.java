@@ -1,6 +1,9 @@
 package com.hrovina.onlinestore.config;
 
 import com.hrovina.onlinestore.services.DBService;
+import com.hrovina.onlinestore.services.EmailService;
+import com.hrovina.onlinestore.services.MockEmailService;
+import com.hrovina.onlinestore.services.SmtpEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +14,7 @@ import java.text.ParseException;
 
 @Configuration
 @Profile("dev")
-public class devConfig {
+public class DevConfig {
 
     @Autowired
     private DBService dbService;
@@ -26,5 +29,10 @@ public class devConfig {
         }
         dbService.instantiateTestDatabase();
         return true;
+    }
+
+    @Bean
+    public EmailService emailService(){
+        return new SmtpEmailService();
     }
 }
