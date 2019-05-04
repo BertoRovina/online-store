@@ -1,6 +1,7 @@
 package com.hrovina.onlinestore.services;
 
 import com.hrovina.onlinestore.entities.PurchaseOrder;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -72,6 +73,5 @@ public abstract class AbstractEmailService implements EmailService{
         mmh.setText(htmlFromTemplateOrder(obj), true);
         return mimeMessage;
     }
-
 }
 

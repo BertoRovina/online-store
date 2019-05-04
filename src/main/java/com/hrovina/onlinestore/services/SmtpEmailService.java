@@ -12,7 +12,7 @@ import javax.mail.internet.MimeMessage;
 public class SmtpEmailService extends AbstractEmailService {
 
     @Autowired
-    private MailSender mailSender; // gets email metadata from resources.application.properties
+    private MailSender mailSender; // gets email info from resources.application.properties
 
     @Autowired
     private JavaMailSender javaMailSender;
