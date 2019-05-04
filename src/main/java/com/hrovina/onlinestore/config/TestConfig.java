@@ -20,12 +20,11 @@ public class TestConfig {
     @Bean
     public boolean instantiateDatabase() throws ParseException {
         dbService.instantiateTestDatabase();
-
         return true;
     }
 
     @Bean
-    public EmailService emailService(){
+    public EmailService emailService() {
         return new MockEmailService();
     }
 }
