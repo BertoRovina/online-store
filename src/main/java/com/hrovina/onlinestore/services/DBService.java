@@ -5,6 +5,7 @@ import com.hrovina.onlinestore.repositories.*;
 import enums.ClientType;
 import enums.PaymentState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.text.ParseException;
@@ -39,7 +40,10 @@ public class DBService {
     private OrderRepository orderRepository;
 
     @Autowired
-    OrderItemRepository orderItemRepository;
+    private OrderItemRepository orderItemRepository;
+
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
    public void instantiateTestDatabase() throws ParseException {
        Category cat1 = new Category(null, "IT");
@@ -103,8 +107,7 @@ public class DBService {
        stateRepository.saveAll(Arrays.asList(est1, est2));
        cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-       Client client1 = new Client(null, "Maria S", "humbertorovina@gmail.com", "3554634",
-               ClientType.LEGAL_PERSON);
+       Client client1 = new Client(null, "Maria S", "humbertorovina@gmail.com", "3554634", ClientType.LEGAL_PERSON, bCryptPasswordEncoder.encode("123"));
        client1.getPhones().addAll(Arrays.asList("6479160000","6479161111"));
 
        Address add1 = new Address(null, "Eglinton Ave", "200", "Apt. 109", "YE", "m9v9l9", client1, c1);

@@ -25,6 +25,9 @@ public class RegisterClientDto implements Serializable {
 
     private Integer clientType;
 
+    @NotEmpty
+    private String password;
+
     @NotEmpty(message = "Client address is mandatory")
     private String address;
 
@@ -44,6 +47,14 @@ public class RegisterClientDto implements Serializable {
     private Integer cityId;
 
     public RegisterClientDto() {
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public void setName(String name) {
