@@ -1,8 +1,8 @@
 package com.hrovina.onlinestore.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import enums.ClientType;
-import enums.Profile;
+import com.hrovina.onlinestore.enums.ClientType;
+import com.hrovina.onlinestore.enums.Profile;
 
 import javax.persistence.*;
 import java.io.Serializable;

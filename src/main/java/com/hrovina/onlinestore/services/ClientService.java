@@ -9,7 +9,7 @@ import com.hrovina.onlinestore.repositories.AddressRepository;
 import com.hrovina.onlinestore.repositories.ClientRepository;
 import com.hrovina.onlinestore.services.exceptions.DataIntegrityException;
 import com.hrovina.onlinestore.services.exceptions.ObjectNotFoundException;
-import enums.ClientType;
+import com.hrovina.onlinestore.enums.ClientType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.domain.Page;

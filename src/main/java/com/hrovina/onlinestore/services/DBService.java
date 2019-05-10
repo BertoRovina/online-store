@@ -2,9 +2,9 @@ package com.hrovina.onlinestore.services;
 
 import com.hrovina.onlinestore.entities.*;
 import com.hrovina.onlinestore.repositories.*;
-import enums.ClientType;
-import enums.PaymentState;
-import enums.Profile;
+import com.hrovina.onlinestore.enums.ClientType;
+import com.hrovina.onlinestore.enums.PaymentState;
+import com.hrovina.onlinestore.enums.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
