@@ -2,10 +2,12 @@ package com.hrovina.onlinestore.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import enums.ClientType;
+import enums.Profile;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Entity
 public class Client implements Serializable {
@@ -31,11 +33,16 @@ public class Client implements Serializable {
     @CollectionTable(name = "phone")
     private Set<String> phones = new HashSet<>();
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    @CollectionTable(name = "PROFILES")
+    private Set<Integer> profiles = new HashSet<>();
+
     @JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<PurchaseOrder> purchaseOrderList = new ArrayList<>();
 
     public Client() {
+        addProfiles(Profile.CLIENT);
     }
 
     public Client(Integer id, String name, String email, String doc, ClientType clientType, String password) {
@@ -46,6 +53,15 @@ public class Client implements Serializable {
         this.doc = doc;
         this.clientType = (clientType == null) ? null : clientType.getCod();
         this.password = password;
+        addProfiles(Profile.CLIENT);
+    }
+
+    public Set<Profile> getProfiles() {
+        return profiles.stream().map(n -> Profile.toEnum(n)).collect(Collectors.toSet());
+    }
+
+    public void addProfiles(Profile profile) {
+        profiles.add(profile.getCod());
     }
 
     public void setPassword(String password) {

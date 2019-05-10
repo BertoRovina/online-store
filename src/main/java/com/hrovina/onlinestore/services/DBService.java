@@ -4,6 +4,7 @@ import com.hrovina.onlinestore.entities.*;
 import com.hrovina.onlinestore.repositories.*;
 import enums.ClientType;
 import enums.PaymentState;
+import enums.Profile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -94,11 +95,11 @@ public class DBService {
        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
        productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
 
-       State est1 = new State(null, "SP");
-       State est2 = new State(null, "MG");
+       State est1 = new State(null, "ON");
+       State est2 = new State(null, "AL");
 
-       City c1  = new City(null, "Uberlandia", est1);
-       City c2  = new City(null, "Sao Paulo", est2);
+       City c1  = new City(null, "Toronto", est1);
+       City c2  = new City(null, "Markham", est2);
        City c3  = new City(null, "Campinas", est2);
 
        est1.getCityList().addAll(Arrays.asList(c2,c3));
@@ -107,7 +108,7 @@ public class DBService {
        stateRepository.saveAll(Arrays.asList(est1, est2));
        cityRepository.saveAll(Arrays.asList(c1, c2, c3));
 
-       Client client1 = new Client(null, "Maria S", "humbertorovina@gmail.com", "3554634", ClientType.LEGAL_PERSON, bCryptPasswordEncoder.encode("123"));
+       Client client1 = new Client(null, "Maria S", "humbertorovina@hotmail.com", "3554634", ClientType.LEGAL_PERSON, bCryptPasswordEncoder.encode("123"));
        client1.getPhones().addAll(Arrays.asList("6479160000","6479161111"));
 
        Address add1 = new Address(null, "Eglinton Ave", "200", "Apt. 109", "YE", "m9v9l9", client1, c1);
@@ -115,8 +116,20 @@ public class DBService {
 
        client1.getAddressList().addAll(Arrays.asList(add1, add2));
 
+       Client client2 = new Client(null, "Berto R", "humbertorovina@gmail.com", "4141421", ClientType.LEGAL_PERSON, bCryptPasswordEncoder.encode("123"));
+       client2.addProfiles(Profile.ADMIN);
+       client2.getPhones().addAll(Arrays.asList("6479165555","6479162222"));
+
+       Address add3 = new Address(null, "Spadina Rd St", "90", null, "Spadina", "m9v9l9", client2, c1);
+       Address add4 = new Address(null, "Twenty 1st Ave", "123", "Apt. 5", "Etobicoke", "m9v9l9", client2, c1);
+       Address add5 = new Address(null, "Yonge Ave", "863", "Apt. 34", "YE", "m9v9l9", client2, c1);
+
+       client2.getAddressList().addAll(Arrays.asList(add3, add4, add5));
+
        clientRepository.save(client1);
+       clientRepository.save(client2);
        addressRepository.saveAll(Arrays.asList(add1, add2));
+       addressRepository.saveAll(Arrays.asList(add3, add4, add5));
 
        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MM/DD/yyyy HH:mm");
        PurchaseOrder order1 = new PurchaseOrder(null, simpleDateFormat.parse("09/30/2017 10:32"), client1, add1);
