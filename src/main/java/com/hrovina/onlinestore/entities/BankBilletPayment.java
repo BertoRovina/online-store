@@ -1,9 +1,8 @@
 package com.hrovina.onlinestore.entities;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import enums.PaymentState;
+import com.hrovina.onlinestore.enums.PaymentState;
 
 import javax.persistence.Entity;
 import java.util.Date;

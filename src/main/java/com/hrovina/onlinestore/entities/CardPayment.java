@@ -2,7 +2,7 @@ package com.hrovina.onlinestore.entities;
 
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-import enums.PaymentState;
+import com.hrovina.onlinestore.enums.PaymentState;
 
 import javax.persistence.Entity;
 

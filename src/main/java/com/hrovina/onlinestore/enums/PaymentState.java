@@ -1,4 +1,4 @@
-package enums;
+package com.hrovina.onlinestore.enums;
 
 public enum PaymentState {
 
