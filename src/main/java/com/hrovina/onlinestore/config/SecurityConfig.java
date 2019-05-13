@@ -3,6 +3,7 @@ package com.hrovina.onlinestore.config;
 import java.util.Arrays;
 
 import com.hrovina.onlinestore.security.JWTAuthenticationFilter;
+import com.hrovina.onlinestore.security.JWTAuthorizationFilter;
 import com.hrovina.onlinestore.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -55,6 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
         httpSecurity.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
+        httpSecurity.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService));
         httpSecurity.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
