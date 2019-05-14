@@ -2,15 +2,13 @@ package com.hrovina.onlinestore.config;
 
 import java.util.Arrays;
 
-import com.hrovina.onlinestore.security.JWTAuthenticationFilter;
-import com.hrovina.onlinestore.security.JWTAuthorizationFilter;
-import com.hrovina.onlinestore.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -21,8 +19,13 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.hrovina.onlinestore.security.JWTAuthenticationFilter;
+import com.hrovina.onlinestore.security.JWTAuthorizationFilter;
+import com.hrovina.onlinestore.security.JWTUtil;
+
 @Configuration
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired
@@ -43,6 +46,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
             "/categories/**"
     };
 
+    private static final String[] PUBLIC_MATCHERS_POST = {
+            "/clients/**"
+    };
+
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception{
 
@@ -53,6 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         httpSecurity.cors().and().csrf().disable();
         httpSecurity.authorizeRequests()
                 .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_GET).permitAll()
+                .antMatchers(HttpMethod.GET, PUBLIC_MATCHERS_POST).permitAll()
                 .antMatchers(PUBLIC_MATCHERS).permitAll()
                 .anyRequest().authenticated();
         httpSecurity.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil));
