@@ -71,7 +71,6 @@ public class CategoryController {
         Page<Category> list = categoryService.findPage(page, linesPerPage, orderBy, direction);
         Page<CategoryDto> listDto = list.map(obj -> new CategoryDto(obj));
         return ResponseEntity.ok().body(listDto);
-
     }
 }
 
