@@ -1,14 +1,17 @@
 package com.hrovina.onlinestore.services;
 
-import com.hrovina.onlinestore.entities.BankBilletPayment;
-import com.hrovina.onlinestore.entities.OrderItem;
-import com.hrovina.onlinestore.entities.PurchaseOrder;
+import com.hrovina.onlinestore.entities.*;
 import com.hrovina.onlinestore.repositories.OrderItemRepository;
 import com.hrovina.onlinestore.repositories.OrderRepository;
 import com.hrovina.onlinestore.repositories.PaymentRepository;
+import com.hrovina.onlinestore.security.UserSS;
+import com.hrovina.onlinestore.services.exceptions.AuthorizationException;
 import com.hrovina.onlinestore.services.exceptions.ObjectNotFoundException;
 import com.hrovina.onlinestore.enums.PaymentState;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -70,5 +73,15 @@ public class OrderService {
         orderItemRepository.saveAll(obj.getItemSet());
         emailService.sendOrderConfirmationHtmlEmail(obj);
         return obj;
+    }
+
+    public Page<PurchaseOrder> findPage(Integer page, Integer linesPerPage, String orderBy, String direction) {
+        UserSS user = UserService.authenticated();
+        if (user == null) {
+            throw new AuthorizationException("Access Denied");
+        }
+        PageRequest pageRequest = PageRequest.of(page, linesPerPage, Direction.valueOf(direction), orderBy);
+        Client client =  clientService.search(user.getId());
+        return repo.findByClient(client, pageRequest);
     }
 }
