@@ -5,8 +5,11 @@ import com.hrovina.onlinestore.dto.RegisterClientDto;
 import com.hrovina.onlinestore.entities.Address;
 import com.hrovina.onlinestore.entities.City;
 import com.hrovina.onlinestore.entities.Client;
+import com.hrovina.onlinestore.enums.Profile;
 import com.hrovina.onlinestore.repositories.AddressRepository;
 import com.hrovina.onlinestore.repositories.ClientRepository;
+import com.hrovina.onlinestore.security.UserSS;
+import com.hrovina.onlinestore.services.exceptions.AuthorizationException;
 import com.hrovina.onlinestore.services.exceptions.DataIntegrityException;
 import com.hrovina.onlinestore.services.exceptions.ObjectNotFoundException;
 import com.hrovina.onlinestore.enums.ClientType;
@@ -35,6 +38,16 @@ public class ClientService {
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Client search(Integer id) {
+
+        UserSS userSS = UserService.authenticated();
+
+        boolean test1 = userSS == null;
+        boolean test2 = !userSS.hashRole(Profile.ADMIN);
+        boolean test3 = !id.equals(userSS.getId());
+
+        if (userSS == null || !userSS.hashRole(Profile.ADMIN) && !id.equals(userSS.getId())){
+            throw new AuthorizationException("Access Denied, you don't have permission to search for clients.");
+        }
         Optional<Client> obj = repo.findById(id);
 
         return obj.orElseThrow(() -> new ObjectNotFoundException(
