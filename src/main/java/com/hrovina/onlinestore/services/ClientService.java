@@ -41,10 +41,6 @@ public class ClientService {
 
         UserSS userSS = UserService.authenticated();
 
-        boolean test1 = userSS == null;
-        boolean test2 = !userSS.hashRole(Profile.ADMIN);
-        boolean test3 = !id.equals(userSS.getId());
-
         if (userSS == null || !userSS.hashRole(Profile.ADMIN) && !id.equals(userSS.getId())){
             throw new AuthorizationException("Access Denied, you don't have permission to search for clients.");
         }
