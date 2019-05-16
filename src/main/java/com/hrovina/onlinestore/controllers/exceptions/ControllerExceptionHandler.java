@@ -1,5 +1,6 @@
 package com.hrovina.onlinestore.controllers.exceptions;
 
+import com.hrovina.onlinestore.services.exceptions.AuthorizationException;
 import com.hrovina.onlinestore.services.exceptions.DataIntegrityException;
 import com.hrovina.onlinestore.services.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -39,5 +40,13 @@ public class ControllerExceptionHandler {
             err.addError(x.getField(), x.getDefaultMessage());
         }
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(err);
+    }
+
+    @ExceptionHandler(AuthorizationException.class)
+    public ResponseEntity<StandardError> authorization(AuthorizationException e,
+                                                        HttpServletRequest httpServletRequest){
+
+        StandardError err = new StandardError(HttpStatus.FORBIDDEN.value(), e.getMessage(), System.currentTimeMillis());
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(err);
     }
 }
