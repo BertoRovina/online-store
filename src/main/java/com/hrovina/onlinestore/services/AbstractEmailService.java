@@ -1,5 +1,6 @@
 package com.hrovina.onlinestore.services;
 
+import com.hrovina.onlinestore.entities.Client;
 import com.hrovina.onlinestore.entities.PurchaseOrder;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -73,5 +74,22 @@ public abstract class AbstractEmailService implements EmailService{
         mmh.setText(htmlFromTemplateOrder(obj), true);
         return mimeMessage;
     }
+
+    @Override
+    public void sendNewPasswordEmail(Client client, String newPass){
+        SimpleMailMessage sm = prepparedNewPasswordEmail(client, newPass);
+        sendEmail(sm);
+    }
+
+    protected SimpleMailMessage prepparedNewPasswordEmail(Client client, String newPass){
+        SimpleMailMessage sm = new SimpleMailMessage();
+        sm.setTo(client.getEmail());
+        sm.setFrom(sender);
+        sm.setSubject("New Password Request");
+        sm.setSentDate(new Date(System.currentTimeMillis()));
+        sm.setText("Your new password is: " + newPass);
+        return sm;
+    }
+
 }
 
