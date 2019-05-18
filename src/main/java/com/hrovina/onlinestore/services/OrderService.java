@@ -1,5 +1,14 @@
 package com.hrovina.onlinestore.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.Date;
+import java.util.Optional;
+
 import com.hrovina.onlinestore.entities.*;
 import com.hrovina.onlinestore.repositories.OrderItemRepository;
 import com.hrovina.onlinestore.repositories.OrderRepository;
@@ -8,15 +17,6 @@ import com.hrovina.onlinestore.security.UserSS;
 import com.hrovina.onlinestore.services.exceptions.AuthorizationException;
 import com.hrovina.onlinestore.services.exceptions.ObjectNotFoundException;
 import com.hrovina.onlinestore.enums.PaymentState;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Sort.Direction;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Date;
-import java.util.Optional;
 
 @Service
 public class OrderService {
