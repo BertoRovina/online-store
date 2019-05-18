@@ -1,5 +1,6 @@
 package com.hrovina.onlinestore.services;
 
+import com.hrovina.onlinestore.entities.Client;
 import com.hrovina.onlinestore.entities.PurchaseOrder;
 import org.springframework.mail.SimpleMailMessage;
 
@@ -14,4 +15,6 @@ public interface EmailService {
     void sendOrderConfirmationHtmlEmail(PurchaseOrder obj);
 
     void sendHtmlEmail(MimeMessage msg);
+
+    void sendNewPasswordEmail(Client client, String newPass);
 }
