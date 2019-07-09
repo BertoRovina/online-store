@@ -18,6 +18,5 @@ public class OnlineStoreApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        s3Service.uploadFile("/Users/humbertorovina/Pictures/IMG_0902.jpg");
     }
 }
