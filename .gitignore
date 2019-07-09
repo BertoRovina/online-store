@@ -24,3 +24,9 @@ HELP.md
 /nbdist/
 /.nb-gradle/
 /build/
+
+### Properties ###
+/src/main/resources/application.properties
+/src/main/resources/application-dev.properties
+/src/main/resources/application-prod.properties
+/src/main/resources/application-test.properties
