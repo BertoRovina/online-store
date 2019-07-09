@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/BertoRovina/online-store.svg?branch=master)](https://travis-ci.org/BertoRovina/online-store)
-
 # Online Store (RESTful API)
 (Under Development)
 
