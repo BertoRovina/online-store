@@ -9,9 +9,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class OnlineStoreApplication implements CommandLineRunner {
 
-    @Autowired
-    private S3Service s3Service;
-
     public static void main(String[] args) {
         SpringApplication.run(OnlineStoreApplication.class, args);
     }
