@@ -5,6 +5,7 @@ import com.amazonaws.AmazonServiceException;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.hrovina.onlinestore.services.exceptions.FileException;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -54,7 +55,7 @@ public class S3Service {
 
             return amazonS3.getUrl(bucketName, filename).toURI();
         } catch (URISyntaxException e) {
-            throw new RuntimeException("Error converting URL to URI");
+            throw new FileException("Error converting URL to URI");
         }
     }
 }
