@@ -50,6 +50,9 @@ public class ClientService {
     @Value("${img.prefix.client.profile}")
     private String prefix;
 
+    @Value("${img.profile.size}")
+    private int imageSize;
+
     public Client search(Integer id) {
 
         UserSS userSS = UserService.authenticated();
@@ -135,6 +138,9 @@ public class ClientService {
         }
 
         BufferedImage jpgImage = imageService.getJpgFromFile(multipartFile);
+        jpgImage = imageService.cropSquare(jpgImage);
+        jpgImage = imageService.resize(jpgImage, imageSize);
+
         String fileName = prefix + userSS.getId() + ".jpg";
 
         return s3Service.uploadFile(imageService.getInputStream(jpgImage, "jpg"), fileName, "image");

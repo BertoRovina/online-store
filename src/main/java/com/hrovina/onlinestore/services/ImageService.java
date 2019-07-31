@@ -2,6 +2,7 @@ package com.hrovina.onlinestore.services;
 
 import com.hrovina.onlinestore.services.exceptions.FileException;
 import org.apache.commons.io.FilenameUtils;
+import org.imgscalr.Scalr;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -47,8 +48,23 @@ public class ImageService {
             ImageIO.write(image, extension, os);
             return new ByteArrayInputStream(os.toByteArray());
         } catch (IOException e) {
-            throw new FileException("Erro ao ler arquivo");
+            throw new FileException("Error while trying to read file");
         }
+    }
+
+    public BufferedImage cropSquare(BufferedImage sourceImg){
+        int min = (sourceImg.getHeight() <= sourceImg.getWidth() ? sourceImg.getHeight() : sourceImg.getWidth());
+        return Scalr.crop(
+                    sourceImg,
+                    (sourceImg.getWidth()/2) - (min/2),
+                    (sourceImg.getHeight()/2) - (min/2),
+                    min,
+                    min
+                );
+    }
+
+    public BufferedImage resize(BufferedImage sourceImg, int size){
+        return Scalr.resize(sourceImg, Scalr.Method.ULTRA_QUALITY, size);
     }
 
 }
