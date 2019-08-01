@@ -66,6 +66,21 @@ public class ClientService {
                 "Object not found, id: " + id + ", type " + Client.class.getName()));
     }
 
+    public Client findByEmail(String email){
+
+        UserSS user = UserService.authenticated();
+        if (user == null || !user.hashRole(Profile.ADMIN) && !email.equals(user.getUsername())) {
+            throw new AuthorizationException("Access Denied.");
+        }
+
+        Client obj = repo.findByEmail(email);
+        if (obj == null) {
+            throw new ObjectNotFoundException(
+                    "Object not found. Id: " + user.getId() + ", Type: " + Client.class.getName());
+        }
+        return obj;
+    }
+
     @Transactional
     public Client insert(Client client){
         client.setId(null);

@@ -31,11 +31,17 @@ public class ClientController {
         return ResponseEntity.ok().body(obj);
     }
 
+    @GetMapping(value = "/email")
+    public ResponseEntity<Client> find(@RequestParam(value = "value") String email){
+        Client obj = clientService.findByEmail(email);
+        return ResponseEntity.ok().body(obj);
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
     public ResponseEntity<Void> update(@Valid @RequestBody ClientDto clientDto, @PathVariable Integer id){
-        Client Client = clientService.fromDTO(clientDto);
-        Client.setId(id);
-        Client = clientService.update(Client);
+        Client client = clientService.fromDTO(clientDto);
+        client.setId(id);
+        clientService.update(client);
         return ResponseEntity.noContent().build();
     }
 
