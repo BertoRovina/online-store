@@ -65,9 +65,51 @@ public class DBService {
        Product p8 = new Product(null, "Trimmer", 800.00);
        Product p9 = new Product(null, "Bedside lamp", 100.00);
        Product p10 = new Product(null, "Pending", 180.00);
-       Product p11 = new Product(null, "Shampoo", 90.00);
+       Product p11 = new Product(null, "Product", 90.00);
+       Product p12 = new Product(null, "Product", 90.00);
+       Product p13 = new Product(null, "Product", 90.00);
+       Product p14 = new Product(null, "Product", 90.00);
+       Product p15 = new Product(null, "Product", 90.00);
+       Product p16 = new Product(null, "Product", 90.00);
+       Product p17 = new Product(null, "Product", 90.00);
+       Product p18 = new Product(null, "Product", 90.00);
+       Product p19 = new Product(null, "Product", 90.00);
+       Product p20 = new Product(null, "Product", 90.00);
+       Product p21 = new Product(null, "Product", 90.00);
+       Product p22 = new Product(null, "Product", 90.00);
+       Product p23 = new Product(null, "Product", 90.00);
+       Product p24 = new Product(null, "Product", 90.00);
+       Product p25 = new Product(null, "Product", 90.00);
+       Product p26 = new Product(null, "Product", 90.00);
+       Product p27 = new Product(null, "Product", 90.00);
+       Product p28 = new Product(null, "Product", 90.00);
+       Product p29 = new Product(null, "Product", 90.00);
+       Product p30 = new Product(null, "Pending", 180.00);
+       Product p31 = new Product(null, "Product", 90.00);
+       Product p32 = new Product(null, "Product", 90.00);
+       Product p33 = new Product(null, "Product", 90.00);
+       Product p34 = new Product(null, "Product", 90.00);
+       Product p35 = new Product(null, "Product", 90.00);
+       Product p36 = new Product(null, "Product", 90.00);
+       Product p37 = new Product(null, "Product", 90.00);
+       Product p38 = new Product(null, "Product", 90.00);
+       Product p39 = new Product(null, "Product", 90.00);
+       Product p40 = new Product(null, "Product", 90.00);
+       Product p41 = new Product(null, "Product", 90.00);
+       Product p42 = new Product(null, "Product", 90.00);
+       Product p43 = new Product(null, "Product", 90.00);
+       Product p44 = new Product(null, "Product", 90.00);
+       Product p45 = new Product(null, "Product", 90.00);
+       Product p46 = new Product(null, "Product", 90.00);
+       Product p47 = new Product(null, "Product", 90.00);
+       Product p48 = new Product(null, "Product", 90.00);
+       Product p49 = new Product(null, "Product", 90.00);
+       Product p50 = new Product(null, "Product", 90.00);
 
-       cat1.getProductList().addAll(Arrays.asList(p1, p2, p3));
+       cat1.getProductList().addAll(Arrays.asList(p1, p2, p3, p12, p13, p14, p15, p16, p17, p18, p19, p20, p21, p22,
+                                                    p23, p24, p25, p26, p27, p28, p29, p30, p31, p32, p33, p34, p35,
+                                                    p36,p37, p38, p39, p40, p41, p42, p43, p44, p45, p46, p47, p48, p49,
+                                                    p50));
        cat2.getProductList().add(p2);
 
        p1.getCategoryList().add(cat1);
@@ -91,9 +133,52 @@ public class DBService {
        p9.getCategoryList().add(cat6);
        p10.getCategoryList().add(cat6);
        p11.getCategoryList().add(cat7);
+       p12.getCategoryList().add(cat1);
+       p13.getCategoryList().add(cat1);
+       p14.getCategoryList().add(cat1);
+       p15.getCategoryList().add(cat1);
+       p16.getCategoryList().add(cat1);
+       p17.getCategoryList().add(cat1);
+       p18.getCategoryList().add(cat1);
+       p19.getCategoryList().add(cat1);
+       p20.getCategoryList().add(cat1);
+       p21.getCategoryList().add(cat1);
+       p22.getCategoryList().add(cat1);
+       p23.getCategoryList().add(cat1);
+       p24.getCategoryList().add(cat1);
+       p25.getCategoryList().add(cat1);
+       p26.getCategoryList().add(cat1);
+       p27.getCategoryList().add(cat1);
+       p28.getCategoryList().add(cat1);
+       p29.getCategoryList().add(cat1);
+       p30.getCategoryList().add(cat1);
+       p31.getCategoryList().add(cat1);
+       p32.getCategoryList().add(cat1);
+       p33.getCategoryList().add(cat1);
+       p34.getCategoryList().add(cat1);
+       p35.getCategoryList().add(cat1);
+       p36.getCategoryList().add(cat1);
+       p37.getCategoryList().add(cat1);
+       p38.getCategoryList().add(cat1);
+       p39.getCategoryList().add(cat1);
+       p40.getCategoryList().add(cat1);
+       p41.getCategoryList().add(cat1);
+       p42.getCategoryList().add(cat1);
+       p43.getCategoryList().add(cat1);
+       p44.getCategoryList().add(cat1);
+       p45.getCategoryList().add(cat1);
+       p46.getCategoryList().add(cat1);
+       p47.getCategoryList().add(cat1);
+       p48.getCategoryList().add(cat1);
+       p49.getCategoryList().add(cat1);
+       p50.getCategoryList().add(cat1);
+       
 
        categoryRepository.saveAll(Arrays.asList(cat1, cat2, cat3, cat4, cat5, cat6, cat7));
-       productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11));
+       productRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16,
+                                        p17, p18, p19, p20, p21, p22, p23, p24, p25, p26, p27, p28, p29, p30, p31, p32,
+                                        p33, p34, p35, p36,p37, p38, p39, p40, p41, p42, p43, p44, p45, p46, p47, p48,
+                                        p49, p50));
 
        State est1 = new State(null, "ON");
        State est2 = new State(null, "AL");
