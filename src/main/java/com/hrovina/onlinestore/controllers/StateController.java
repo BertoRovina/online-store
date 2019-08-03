@@ -6,7 +6,6 @@ import com.hrovina.onlinestore.entities.City;
 import com.hrovina.onlinestore.entities.State;
 import com.hrovina.onlinestore.services.CityService;
 import com.hrovina.onlinestore.services.StateService;
-import com.hrovina.onlinestore.services.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
